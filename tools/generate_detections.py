@@ -4,8 +4,8 @@ import errno
 import argparse
 import numpy as np
 import cv2
-import tensorflow as tf
-
+import tensorflow.compat.v1 as tf
+tf.disable_v2_behavior()
 
 def _run_in_batches(f, data_dict, out, batch_size):
     data_len = len(out)
@@ -55,7 +55,7 @@ def extract_image_patch(image, bbox, patch_shape):
 
     # convert to top left, bottom right
     bbox[2:] += bbox[:2]
-    bbox = bbox.astype(np.int)
+    #bbox = bbox.astype(np.int)
 
     # clip at image boundaries
     bbox[:2] = np.maximum(0, bbox[:2])
